@@ -1,0 +1,6 @@
+ERROR: Database connection failed
+INFO: Server started
+ERROR: Timeout on port 8080
+WARNING: Low memory
+INFO: Request processed
+ERROR: Authentication failed
