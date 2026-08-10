@@ -389,3 +389,21 @@ Give users/services ONLY the minimum permissions needed - never use superuser/ro
 
 **Why PHP Needs Apache:**
 PHP code must be PROCESSED by a web server before becoming HTML. Apache receives requests, hands PHP files to PHP interpreter, then sends the resulting HTML to browser.
+---
+
+## Infrastructure as Code
+
+**init.sql / create_db.sql**
+What it does: SQL scripts that automate database setup - creating databases, users, tables, and data in one reproducible file.
+Why it matters: Instead of manually typing 50+ commands, run one script to rebuild entire infrastructure. Critical for disaster recovery, onboarding new team members, and CI/CD pipelines.
+
+Example workflow:
+sudo -u postgres psql -f create_db.sql
+sudo -u postgres psql -d portfolio_db -f init.sql
+
+**Best Practice: Separate Concerns**
+- create_db.sql = superuser tasks (create database, create user)
+- init.sql = schema and data (tables, inserts, permissions)
+
+**Idempotency:**
+Scripts should be safe to run multiple times without breaking things. Real production scripts often use IF NOT EXISTS checks or DROP IF EXISTS before CREATE to handle re-runs safely.
